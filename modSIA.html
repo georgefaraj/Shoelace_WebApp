@@ -1,0 +1,68 @@
+<html>
+<header>
+  <title>Campaign Builder</title>
+</header>
+<body>
+
+  
+<form action="SIA.php" id="SIAform" method="POST" target="_blank">
+  Title:<br>
+  <input type="text" name="title" id="title" value="Default Title">
+  <br>
+  <br>
+  
+  Ad Copy:<br>
+  <textarea rows="4" cols="50" name="ad_copy" id="ad_copy" form="SIAform">Default Text</textarea>
+  <br>
+  <br>
+
+  Campaign Objective:<br>
+  <input type="text" name="camp_obj" id="camp_obj" value="LeadGeneration">
+  <br>
+  <br>
+
+  Image URL:<br>
+  <input type="text" name="img_src" id="img_src" value="">
+
+  <br><br>
+  <input type="submit" name="publish" value="Publish">
+  <input type="submit" name="save" value="Save">
+</form> 
+
+
+<script>
+  var URLin = window.location.search;
+  if(URLin.includes("?")){
+    if(URLin.includes("*")){
+      var data = window.prompt("Please enter the given JSON","");
+      if (data == null || data == "" || !isValidJson(data)) {
+        window.alert("The data entered was incorrected");
+        window.history.back();
+      } 
+
+      data = JSON.parse(data);
+
+      var T = document.getElementById("title");
+      var A = document.getElementById("ad_copy");
+      var I = document.getElementById("img_src");
+      var C = document.getElementById("camp_obj");
+
+      T.value = data.title;
+      A.innerHTML = data.ad_copy;
+      I.value = data.img_src;
+      C.value = data.camp_obj;
+    }
+  }
+
+    function isValidJson(json) {
+      try {
+          JSON.parse(json);
+          return true;
+      } catch (e) {
+          return false;
+      }
+    }
+</script>
+
+</body>
+</html>
